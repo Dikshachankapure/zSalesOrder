@@ -1,0 +1,84 @@
+<mvc:View controllerName="demo.zsalesorders.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+	<Shell id="shell" xmlns:viz="sap.viz.ui5.controls" xmlns:layout="sap.ui.layout" xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
+		xmlns:vizData="sap.viz.ui5.data">
+		<App id="app">
+			<pages>
+				<Page id="page" title="Manage Products">
+					<content>
+						<Panel expandable="true" expanded="true" headerText="Products" width="auto" class="sapUiResponsiveMargin">
+							<content>
+								<Bar>
+									<contentLeft>
+										<Button icon="sap-icon://table-view" press="onPressList" type="Emphasized"/>
+										<Button icon="sap-icon://bar-chart" press="onPressChart" type="Emphasized"/>
+									</contentLeft>
+								</Bar>
+								<Table class="sapUiResponsiveMargin sapUiNoMarginTop" visible="true" id="tblSalesOrder"
+									items="{ path:'/ProductSet',sorter:{path:'ProductID'}}" noDataText="No Data Found" width="auto" growingThreshold="10" growing="true"
+									growingScrollToLoad="true">
+									<headerToolbar>
+										<Toolbar>
+											<content>
+												<ToolbarSpacer/>
+												<SearchField id="txtSearch" class="searchStyle" placeholder="Search by Product ID" liveChange="onSearch" width="25%"/>
+											</content>
+										</Toolbar>
+									</headerToolbar>
+									<columns>
+										<Column demandPopin="true">
+											<Text text="Product ID"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Product Name"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Category"/>
+										</Column>
+										<Column minScreenWidth="Tablet" demandPopin="true">
+											<Text text="Supplier Name"/>
+										</Column>
+										<Column hAlign="Left" demandPopin="true" minScreenWidth="Tablet">
+											<Text text="Price"/>
+										</Column>
+									</columns>
+									<items>
+										<ColumnListItem type="Inactive">
+											<cells>
+												<Text text="{ProductID}"/>
+												<Text text="{Name}"/>
+												<Text text="{Category}"/>
+												<Text text="{SupplierName}"/>
+												<Text text="{Price}"/>
+											</cells>
+										</ColumnListItem>
+									</items>
+								</Table>
+								<layout:FixFlex id='chartFixFlex' visible="false" minFlexSize="500">
+									<layout:flexContent>
+										<viz:Popover id="idPopOver"></viz:Popover>
+										<viz:VizFrame id="idVizFrame" uiConfig="{applicationSet:'fiori'}" vizType="column" width="100%" height="100%">
+											<viz:dataset>
+												<vizData:FlattenedDataset data="{/ProductSet}">
+													<vizData:dimensions>
+														<vizData:DimensionDefinition name="Product Name" value="{Name}"/>
+													</vizData:dimensions>
+													<vizData:measures>
+														<vizData:MeasureDefinition name="Price" value="{Price}"/>
+													</vizData:measures>
+												</vizData:FlattenedDataset>
+											</viz:dataset>
+											<viz:feeds>
+												<vizFeeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure" values="Price"/>
+												<vizFeeds:FeedItem id='categoryAxisFeed' uid="categoryAxis" type="Dimension" values="Product Name"/>
+											</viz:feeds>
+										</viz:VizFrame>
+									</layout:flexContent>
+								</layout:FixFlex>
+							</content>
+						</Panel>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

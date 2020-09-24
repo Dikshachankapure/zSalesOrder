@@ -1,0 +1,23 @@
+@media (min-width: 768px) and (max-width: 1024px) {
+    .searchStyle {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+    .searchStyle {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+    .searchStyle {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+    .searchStyle {
+        width: 100% !important;
+    }
+}
